@@ -16,22 +16,51 @@ body{
   align-items:flex-end;
 }
 
+/* 🌿 Ground with Grass */
+.ground{
+  position:absolute;
+  bottom:0;
+  width:100%;
+  height:18vh;
+  background:linear-gradient(#1b5e20,#0d3b12);
+  overflow:hidden;
+}
+
+/* Grass blades */
+.grass{
+  position:absolute;
+  bottom:0;
+  width:3px;
+  height:30px;
+  background:#2e7d32;
+  border-radius:50%;
+  transform-origin:bottom;
+  animation:sway 3s ease-in-out infinite alternate;
+}
+
+@keyframes sway{
+  from{ transform:rotate(-8deg);}
+  to{ transform:rotate(8deg);}
+}
+
 /* Scene container */
 .scene{
   display:flex;
-  justify-content: space-evenly; /* FIXED */
+  justify-content: space-evenly;
   align-items:flex-end;
   width:100%;
   height:60vh;
-  padding:0 5vw; /* breathing room */
+  padding:0 5vw;
+  position:relative;
+  z-index:2;
 }
 
-/* STEM GROW */
+/* 🌷 Bigger Stem */
 .stem{
-  width:0.8vw;
-  max-width:6px;
-  height:30vh;
-  background:linear-gradient(#2e7d32,#145214);
+  width:1.5vw;
+  max-width:12px;
+  height:38vh;
+  background:linear-gradient(#43a047,#1b5e20);
   position:relative;
   transform-origin:bottom;
   transform:scaleY(0);
@@ -47,11 +76,11 @@ body{
 /* Leaves */
 .leaf{
   position:absolute;
-  width:8vw;
-  max-width:80px;
-  height:4vw;
-  max-height:40px;
-  background:linear-gradient(#43a047,#1b5e20);
+  width:10vw;
+  max-width:110px;
+  height:5vw;
+  max-height:50px;
+  background:linear-gradient(#4caf50,#1b5e20);
   border-radius:50%;
   opacity:0;
   animation: showLeaf 1s ease forwards;
@@ -59,13 +88,13 @@ body{
 }
 
 .leaf.left{
-  left:-6vw;
+  left:-8vw;
   top:40%;
   transform:rotate(-40deg);
 }
 
 .leaf.right{
-  right:-6vw;
+  right:-8vw;
   top:55%;
   transform:rotate(40deg);
 }
@@ -74,7 +103,7 @@ body{
   to{ opacity:1; }
 }
 
-/* Tulip head container */
+/* Flower container */
 .flower{
   position:absolute;
   bottom:100%;
@@ -87,12 +116,13 @@ body{
   to{ transform:scale(1); }
 }
 
+/* 🌷 Bigger Tulip */
 .tulip {
   position: relative;
-  width: 6vw;
-  max-width: 60px;
-  height: 9vw;
-  max-height: 90px;
+  width: 8vw;
+  max-width: 90px;
+  height: 12vw;
+  max-height: 130px;
   display:flex;
   justify-content:center;
   align-items:flex-end;
@@ -124,11 +154,8 @@ body{
   right: 0;
 }
 
-/* Bloom animation */
 @keyframes bloom {
-  to {
-    transform: scaleY(1);
-  }
+  to { transform: scaleY(1); }
 }
 
 /* Fireflies */
@@ -147,33 +174,31 @@ body{
   to{ transform: translateY(-60px);}
 }
 
-/* Mobile adjustment */
+/* 📱 Mobile */
 @media(max-width:768px){
 
-  .scene{
-    height:70vh;
-    justify-content: space-evenly;
-    padding:0 6vw;
-  }
-
   .stem{
-    width:1vw;
+    width:2vw;
+    height:35vh;
   }
 
   .tulip{
-    width:8vw;   /* reduced so they don't collide */
-    height:12vw;
+    width:12vw;
+    height:16vw;
   }
 
   .leaf{
-    width:10vw;
-    height:5vw;
+    width:14vw;
+    height:7vw;
   }
 
 }
 </style>
 </head>
 <body>
+
+<!-- Grass Ground -->
+<div class="ground" id="ground"></div>
 
 <div class="scene">
   
@@ -216,6 +241,20 @@ body{
 </div>
 
 <script>
+
+/* 🌿 Generate Grass */
+const ground = document.getElementById("ground");
+
+for(let i=0;i<150;i++){
+  const g=document.createElement("div");
+  g.className="grass";
+  g.style.left=Math.random()*100+"%";
+  g.style.height=20+Math.random()*25+"px";
+  g.style.animationDuration=2+Math.random()*2+"s";
+  ground.appendChild(g);
+}
+
+/* ✨ Fireflies */
 for(let i=0;i<20;i++){
   const f=document.createElement("div");
   f.className="firefly";
@@ -224,6 +263,7 @@ for(let i=0;i<20;i++){
   f.style.animationDuration=3+Math.random()*4+"s";
   document.body.appendChild(f);
 }
+
 </script>
 
 </body>
