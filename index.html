@@ -19,11 +19,11 @@ body{
 /* Scene container */
 .scene{
   display:flex;
-  justify-content:center;
+  justify-content: space-evenly; /* FIXED */
   align-items:flex-end;
   width:100%;
   height:60vh;
-  gap:5vw;
+  padding:0 5vw; /* breathing room */
 }
 
 /* STEM GROW */
@@ -37,7 +37,7 @@ body{
   transform:scaleY(0);
   animation: growStem 2s ease-out forwards;
   display:flex;
-  justify-content:center; /* center flower horizontally */
+  justify-content:center;
 }
 
 @keyframes growStem{
@@ -149,25 +149,27 @@ body{
 
 /* Mobile adjustment */
 @media(max-width:768px){
+
   .scene{
     height:70vh;
-    gap:3vw;
+    justify-content: space-evenly;
+    padding:0 6vw;
   }
+
   .stem{
     width:1vw;
   }
+
   .tulip{
-    width:10vw;
-    height:14vw;
+    width:8vw;   /* reduced so they don't collide */
+    height:12vw;
   }
-  .petal{
-    width:60%;
-    height:100%;
-  }
+
   .leaf{
-    width:12vw;
-    height:6vw;
+    width:10vw;
+    height:5vw;
   }
+
 }
 </style>
 </head>
@@ -214,7 +216,6 @@ body{
 </div>
 
 <script>
-/* Fireflies */
 for(let i=0;i<20;i++){
   const f=document.createElement("div");
   f.className="firefly";
